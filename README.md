@@ -21,7 +21,7 @@ Este projeto desenvolve e avalia modelos preditivos para identificar recém-nasc
 
 O fluxo analítico contempla desde a preparação da base de dados até a seleção do modelo final, com foco em **apoio à tomada de decisão em saúde materno-infantil**.
 
-Além da modelagem estatística, o projeto inclui tratamento dos dados, análise exploratória, engenharia de atributos, comparação entre algoritmos de aprendizado de máquina e elaboração de um relatório técnico em linguagem acessível.
+Além da modelagem estatística, o projeto inclui tratamento dos dados, análise exploratória, análise bivariada, engenharia de atributos, comparação entre algoritmos de aprendizado de máquina e elaboração de relatório técnico em linguagem acessível.
 
 ---
 
@@ -60,6 +60,9 @@ Tratamento e Limpeza
 Análise Exploratória
         │
         ▼
+Análise Bivariada
+        │
+        ▼
 Engenharia de Atributos
         │
         ▼
@@ -83,38 +86,36 @@ Relatório Técnico
 ## Estrutura do Repositório
 
 ```text
-baixo-peso-ao-nascer/
+predicao-baixo-peso-ao-nascer/
 │
 ├── R/
 │   ├── 00_setup.R
 │   ├── 01_importacao.R
 │   ├── 02_tratamento.R
 │   ├── 03_eda.R
-│   ├── 04_features.R
+│   ├── 04_bivariada.R
 │   ├── 05_preparacao_modelagem.R
 │   ├── 06_modelagem.R
 │   ├── 07_avaliacao.R
-│   └── 08_relatorio.qmd
+│   ├── 08_relatorio.qmd
+│   ├── funcoes_eda.R
+│   ├── funcoes_features.R
+│   ├── funcoes_modelagem.R
+│   ├── funcoes_tratamento.R
+│   └── relatorio.css
 │
-├── dados/
-│   └── Base de dados não disponibilizada publicamente
+├── resultados/
+│   ├── 08_relatorio.html
+│   └── relatorio.css
 │
-├── objetos/
-│   └── Objetos intermediários gerados pelo projeto
-│
-├── relatorios/
-│   └── Relatórios técnicos gerados em Quarto
-│
-├── figuras/
-│   └── Gráficos e visualizações do projeto
-│
-├── renv/
-│   └── Ambiente reprodutível do projeto
-│
+├── .gitignore
+├── .Rprofile
 ├── README.md
-├── renv.lock
-└── baixo-peso-ao-nascer.Rproj
+├── baixo-peso-ao-nascer.Rproj
+└── renv.lock
 ```
+
+> A base de dados original não está incluída no repositório por possuir caráter confidencial.
 
 ---
 
@@ -139,9 +140,13 @@ baixo-peso-ao-nascer/
 
 | Etapa | Descrição |
 |---|---|
+| Setup do projeto | Carregamento de pacotes, configuração de caminhos e ambiente de trabalho |
+| Importação dos dados | Leitura da base original utilizada no projeto |
 | Tratamento dos dados | Limpeza, padronização e tratamento de valores ausentes |
+| Análise exploratória | Avaliação inicial das variáveis e identificação de padrões gerais |
+| Análise bivariada | Investigação da relação entre variáveis explicativas e o desfecho |
 | Engenharia de atributos | Construção de variáveis derivadas e indicadores de risco |
-| Análise exploratória | Avaliação de padrões, distribuições e relações entre variáveis |
+| Preparação para modelagem | Separação da base, pré-processamento e organização dos dados para treino |
 | Modelagem | Treinamento de diferentes algoritmos de classificação |
 | Avaliação | Comparação dos modelos por métricas de desempenho |
 | Comunicação | Elaboração de relatório técnico com linguagem acessível |
@@ -240,22 +245,13 @@ Neste projeto, como o objetivo era apoiar a identificação de recém-nascidos c
 
 ---
 
-## Entregas do Projeto
-
-- Pipeline analítico modular em R.
-- Base tratada e preparada para modelagem.
-- Engenharia de atributos e construção de indicadores relacionados ao risco gestacional.
-- Análise exploratória dos dados.
-- Comparação entre diferentes algoritmos de aprendizado de máquina.
-- Seleção do modelo final com base em critério alinhado ao contexto clínico.
-- Relatório técnico desenvolvido em Quarto.
-- Estrutura organizada para reutilização em projetos futuros.
-
----
-
 ## Relatório Técnico
 
-O projeto inclui um relatório técnico elaborado em Quarto, com foco na comunicação dos resultados para públicos técnicos e não técnicos.
+O projeto inclui um relatório técnico elaborado em Quarto, disponível em:
+
+```text
+resultados/08_relatorio.html
+```
 
 O relatório contempla:
 
@@ -279,7 +275,7 @@ Para executar o projeto localmente, recomenda-se utilizar o RStudio.
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/SEU-USUARIO/baixo-peso-ao-nascer.git
+git clone https://github.com/GJFR71/predicao-baixo-peso-ao-nascer.git
 ```
 
 ### 2. Abrir o projeto no RStudio
@@ -301,15 +297,15 @@ renv::restore()
 ### 4. Executar os scripts na ordem
 
 ```text
-00_setup.R
-01_importacao.R
-02_tratamento.R
-03_eda.R
-04_features.R
-05_preparacao_modelagem.R
-06_modelagem.R
-07_avaliacao.R
-08_relatorio.qmd
+R/00_setup.R
+R/01_importacao.R
+R/02_tratamento.R
+R/03_eda.R
+R/04_bivariada.R
+R/05_preparacao_modelagem.R
+R/06_modelagem.R
+R/07_avaliacao.R
+R/08_relatorio.qmd
 ```
 
 ### 5. Renderizar o relatório
@@ -317,6 +313,8 @@ renv::restore()
 ```r
 quarto::quarto_render("R/08_relatorio.qmd")
 ```
+
+O relatório renderizado será disponibilizado na pasta `resultados/`.
 
 ---
 
@@ -327,6 +325,19 @@ Os dados utilizados neste projeto possuem caráter confidencial e não podem ser
 Por esse motivo, a base original não está incluída no repositório.
 
 Ainda assim, o fluxo analítico permanece reproduzível mediante utilização de uma base com estrutura equivalente.
+
+---
+
+## Entregas do Projeto
+
+- Pipeline analítico modular em R.
+- Base tratada e preparada para modelagem.
+- Engenharia de atributos e construção de indicadores relacionados ao risco gestacional.
+- Análise exploratória e bivariada dos dados.
+- Comparação entre diferentes algoritmos de aprendizado de máquina.
+- Seleção do modelo final com base em critério alinhado ao contexto clínico.
+- Relatório técnico desenvolvido em Quarto.
+- Estrutura organizada para reutilização em projetos futuros.
 
 ---
 
