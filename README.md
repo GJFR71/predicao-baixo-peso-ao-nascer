@@ -108,15 +108,16 @@ predicao-baixo-peso-ao-nascer/
 │   ├── 08_relatorio.html
 │   └── relatorio.css
 │
+├── renv/
+│   ├── .gitignore
+│   ├── activate.R
+│   └── settings.json
+│
 ├── .gitignore
 ├── .Rprofile
 ├── README.md
 ├── baixo-peso-ao-nascer.Rproj
 └── renv.lock
-```
-
-> A base de dados original não está incluída no repositório por possuir caráter confidencial.
-
 ---
 
 ## Tecnologias Utilizadas
