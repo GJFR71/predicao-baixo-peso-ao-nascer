@@ -27,13 +27,16 @@ Além da modelagem estatística, o projeto inclui tratamento dos dados, análise
 
 ## Relatório Técnico
 
-O relatório técnico completo está disponível em PDF:
+O relatório técnico completo está disponível em PDF para leitura direta no GitHub:
 
 [📄 Acessar Relatório Técnico em PDF](resultados/08_relatorio.pdf)
 
-Também está disponível a versão HTML renderizada:
+A versão HTML também está disponível no repositório, mas deve ser baixada junto com o arquivo de estilo para visualização local:
 
-[🌐 Acessar versão HTML do relatório](resultados/08_relatorio.html)
+- [`08_relatorio.html`](resultados/08_relatorio.html)
+- [`relatorio.css`](resultados/relatorio.css)
+
+Para visualizar a versão HTML corretamente, baixe os dois arquivos da pasta `resultados/` e abra o `08_relatorio.html` no navegador.
 
 O relatório apresenta o fluxo metodológico, os resultados dos modelos, a seleção do modelo final e a interpretação prática dos achados.
 
@@ -273,9 +276,9 @@ Arquivos disponíveis:
 
 | Arquivo | Descrição |
 |---|---|
-| [`08_relatorio.pdf`](resultados/08_relatorio.pdf) | Versão principal para leitura no GitHub |
-| [`08_relatorio.html`](resultados/08_relatorio.html) | Versão HTML renderizada |
-| [`relatorio.css`](resultados/relatorio.css) | Arquivo de estilo utilizado na versão HTML |
+| [`08_relatorio.pdf`](resultados/08_relatorio.pdf) | Versão principal para leitura direta no GitHub |
+| [`08_relatorio.html`](resultados/08_relatorio.html) | Versão HTML renderizada para download e visualização local |
+| [`relatorio.css`](resultados/relatorio.css) | Arquivo de estilo utilizado pela versão HTML |
 
 O relatório contempla:
 
