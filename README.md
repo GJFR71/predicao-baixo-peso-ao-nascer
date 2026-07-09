@@ -25,6 +25,20 @@ Além da modelagem estatística, o projeto inclui tratamento dos dados, análise
 
 ---
 
+## Relatório Técnico
+
+O relatório técnico completo está disponível em PDF:
+
+[📄 Acessar Relatório Técnico em PDF](resultados/08_relatorio.pdf)
+
+Também está disponível a versão HTML renderizada:
+
+[🌐 Acessar versão HTML do relatório](resultados/08_relatorio.html)
+
+O relatório apresenta o fluxo metodológico, os resultados dos modelos, a seleção do modelo final e a interpretação prática dos achados.
+
+---
+
 ## Contexto
 
 O baixo peso ao nascer é um importante indicador de saúde pública, pois pode estar associado a complicações neonatais e a impactos no desenvolvimento infantil.
@@ -105,6 +119,7 @@ predicao-baixo-peso-ao-nascer/
 │   └── relatorio.css
 │
 ├── resultados/
+│   ├── 08_relatorio.pdf
 │   ├── 08_relatorio.html
 │   └── relatorio.css
 │
@@ -118,6 +133,10 @@ predicao-baixo-peso-ao-nascer/
 ├── README.md
 ├── baixo-peso-ao-nascer.Rproj
 └── renv.lock
+```
+
+> A base de dados original não está incluída no repositório por possuir caráter confidencial.
+
 ---
 
 ## Tecnologias Utilizadas
@@ -246,13 +265,17 @@ Neste projeto, como o objetivo era apoiar a identificação de recém-nascidos c
 
 ---
 
-## Relatório Técnico
+## Relatório Técnico Completo
 
-O projeto inclui um relatório técnico elaborado em Quarto, disponível em:
+O projeto inclui um relatório técnico elaborado em Quarto, com foco na comunicação dos resultados para públicos técnicos e não técnicos.
 
-```text
-resultados/08_relatorio.html
-```
+Arquivos disponíveis:
+
+| Arquivo | Descrição |
+|---|---|
+| [`08_relatorio.pdf`](resultados/08_relatorio.pdf) | Versão principal para leitura no GitHub |
+| [`08_relatorio.html`](resultados/08_relatorio.html) | Versão HTML renderizada |
+| [`relatorio.css`](resultados/relatorio.css) | Arquivo de estilo utilizado na versão HTML |
 
 O relatório contempla:
 
@@ -295,7 +318,19 @@ No console do R, execute:
 renv::restore()
 ```
 
-### 4. Executar os scripts na ordem
+Esse comando utiliza o arquivo `renv.lock` para restaurar as versões dos pacotes utilizadas no projeto.
+
+### 4. Disponibilizar a base de dados
+
+A base original não está incluída no repositório por possuir caráter confidencial.
+
+Para reprodução integral, é necessário utilizar uma base com estrutura equivalente e ajustar o caminho de importação conforme previsto no script:
+
+```text
+R/01_importacao.R
+```
+
+### 5. Executar os scripts na ordem
 
 ```text
 R/00_setup.R
@@ -309,7 +344,7 @@ R/07_avaliacao.R
 R/08_relatorio.qmd
 ```
 
-### 5. Renderizar o relatório
+### 6. Renderizar o relatório
 
 ```r
 quarto::quarto_render("R/08_relatorio.qmd")
@@ -338,6 +373,7 @@ Ainda assim, o fluxo analítico permanece reproduzível mediante utilização de
 - Comparação entre diferentes algoritmos de aprendizado de máquina.
 - Seleção do modelo final com base em critério alinhado ao contexto clínico.
 - Relatório técnico desenvolvido em Quarto.
+- Versão em PDF do relatório para leitura direta no GitHub.
 - Estrutura organizada para reutilização em projetos futuros.
 
 ---
