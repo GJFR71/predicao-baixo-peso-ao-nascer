@@ -1,0 +1,274 @@
+/* ==========================================================
+  RELATÓRIO TÉCNICO
+Projeto: Baixo Peso ao Nascer
+========================================================== */
+  
+  
+  /* ---------- Página ---------- */
+  
+  body{
+    
+    background:#F5F8F7;
+      
+      color:#2F3E46;
+      
+      font-family: "Segoe UI", "Source Sans Pro", Arial, sans-serif;
+    
+    line-height:1.8;
+    
+    font-size:17px;
+    
+  }
+
+
+/* ---------- Área principal ---------- */
+  
+  main{
+    
+    background:white;
+    
+    padding:45px;
+    
+    border-radius:12px;
+    
+    box-shadow:0px 3px 12px rgba(0,0,0,.08);
+    
+  }
+
+
+/* ---------- Sumário ---------- */
+  
+  .sidebar nav{
+    
+    background:#EEF5F3;
+      
+      border-radius:10px;
+    
+    padding:15px;
+    
+  }
+
+
+/* ---------- Título ---------- */
+  
+  h1.title{
+    
+    color:#1F5E5B;
+      
+      font-size:2.4em;
+    
+    font-weight:700;
+    
+    border-bottom:4px solid #8CB8A8;
+    
+    padding-bottom:15px;
+    
+  }
+
+
+/* ---------- Subtítulo ---------- */
+  
+  .subtitle{
+    
+    color:#4E6E68;
+      
+      font-size:1.25em;
+    
+    margin-bottom:35px;
+    
+  }
+
+
+/* ---------- Autor ---------- */
+  
+  .quarto-title-meta{
+    
+    color:#667B77;
+      
+  }
+
+
+/* ---------- Cabeçalhos ---------- */
+  
+  h1{
+    
+    color:#1F5E5B;
+      
+      margin-top:55px;
+    
+  }
+
+
+h2{
+  
+  color:#2F7D6B;
+    
+    margin-top:35px;
+  
+}
+
+
+h3{
+  
+  color:#548C80;
+    
+}
+
+
+/* ---------- Texto ---------- */
+  
+  p{
+    
+    text-align:justify;
+    
+  }
+
+
+/* ---------- Listas ---------- */
+  
+  ul{
+    
+    margin-bottom:20px;
+    
+  }
+
+
+li{
+  
+  margin-bottom:8px;
+  
+}
+
+
+/* ---------- Tabelas GT ---------- */
+  
+  .gt_table{
+    
+    border-radius:10px;
+    
+    overflow:hidden;
+    
+  }
+
+
+.gt_heading{
+  
+  background:#2F7D6B !important;
+    
+    color:white !important;
+  
+}
+
+
+.gt_col_headings{
+  
+  background:#DCEFE8 !important;
+    
+}
+
+
+.gt_row:nth-child(even){
+  
+  background:#F6FBF9;
+    
+}
+
+
+/* ---------- Figuras ---------- */
+  
+  figure{
+    
+    background:#FAFCFB;
+      
+      border:1px solid #D8E4E1;
+    
+    border-radius:10px;
+    
+    padding:18px;
+    
+    margin-top:25px;
+    
+    margin-bottom:30px;
+    
+  }
+
+
+/* ---------- Legendas ---------- */
+  
+  figcaption{
+    
+    color:#60756F;
+      
+      font-size:.92em;
+    
+    text-align:center;
+    
+  }
+
+
+/* ---------- Código (caso apareça) ---------- */
+  
+  pre{
+    
+    background:#F3F6F5;
+      
+      border-left:5px solid #2F7D6B;
+    
+  }
+
+
+/* ---------- Links ---------- */
+  
+  a{
+    
+    color:#1F5E5B;
+      
+  }
+
+
+a:hover{
+  
+  color:#2F7D6B;
+    
+}
+
+
+/* ---------- Blocos ---------- */
+  
+  blockquote{
+    
+    background:#EEF5F3;
+      
+      border-left:6px solid #2F7D6B;
+    
+    padding:18px;
+    
+  }
+
+
+/* ---------- Rodapé ---------- */
+  
+  footer{
+    
+    color:#738681;
+      
+  }
+
+
+/* ---------- Impressão ---------- */
+  
+  @media print{
+    
+    body{
+      
+      background:white;
+      
+    }
+    
+    main{
+      
+      box-shadow:none;
+      
+    }
+    
+  }
