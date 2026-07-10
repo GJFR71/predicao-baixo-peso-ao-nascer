@@ -333,6 +333,10 @@ Os resultados demonstram que todos os modelos apresentaram desempenho semelhante
 
 Embora alguns algoritmos tenham apresentado pequenas vantagens em métricas específicas, o modelo **Lasso** apresentou o maior valor de **Recall**, critério definido como prioritário neste trabalho por representar a capacidade do modelo em reconhecer corretamente os indivíduos pertencentes ao grupo de risco.
 
+
+Além de apresentar o maior Recall entre os modelos avaliados, o modelo Lasso também demonstrou ganho em relação à triagem clínica estimada a partir dos registros disponíveis na base, ampliando a capacidade de identificação dos casos de baixo peso ao nascer.
+
+
 ## Comparação gráfica
 
 Para facilitar a interpretação dos resultados, a Figura 4 apresenta apenas a comparação da principal métrica utilizada para seleção do modelo: o **Recall**.
@@ -412,6 +416,7 @@ comparacao_modelos |>
 
 Observa-se que o modelo **Lasso** apresentou o melhor desempenho nessa métrica, seguido pelos modelos Ridge, Random Forest e XGBoost. Embora as diferenças sejam discretas, a escolha do modelo baseou-se justamente na maior capacidade de identificar corretamente os indivíduos pertencentes ao grupo de risco.
 
+
 ## Modelo selecionado
 
 Com base no critério previamente estabelecido, o modelo **Lasso** foi selecionado para utilização neste trabalho.
@@ -477,7 +482,11 @@ melhor_modelo |>
 
 Em termos práticos, os resultados indicam que o modelo foi capaz de identificar corretamente aproximadamente **57 em cada 100 recém-nascidos** que efetivamente apresentaram baixo peso ao nascer.
 
-Embora exista margem para aprimoramento da capacidade preditiva, o desempenho observado demonstra potencial para utilização como ferramenta complementar de apoio à tomada de decisão em saúde, especialmente em situações nas quais a identificação precoce dos indivíduos pertencentes ao grupo de risco constitui prioridade.
+Embora exista margem para aprimoramento da capacidade preditiva, o desempenho observado demonstra potencial para utilização do modelo como ferramenta complementar de apoio à decisão em saúde, especialmente quando a identificação precoce dos casos de maior risco constitui prioridade.
+
+Além disso, o Lasso apresentou **ganho prático em relação à triagem clínica** estimada a partir dos registros disponíveis na base. Enquanto essa triagem estimada identificou cerca de 47% dos casos de baixo peso ao nascer, **o modelo ampliou essa capacidade** para aproximadamente 56,5%, representando um ganho absoluto de 9,5 pontos percentuais e uma melhora relativa de cerca de 20,2% na identificação dos casos que poderiam demandar acompanhamento prioritário.
+
+
 
 # Aplicação prática dos resultados
 
@@ -488,6 +497,31 @@ Na ausência de um modelo preditivo, a identificação de recém-nascidos com ma
 Embora essa abordagem seja indispensável, o grande número de fatores potencialmente associados ao baixo peso ao nascer pode dificultar a avaliação simultânea de todas as informações relevantes.
 
 A utilização de um modelo preditivo não substitui a avaliação clínica, mas acrescenta uma estimativa objetiva de risco construída a partir da combinação de múltiplas características maternas, obstétricas e gestacionais.
+
+
+## Comparação com a triagem clínica estimada
+
+Além da comparação entre os modelos preditivos, foi realizada uma análise complementar para avaliar o possível ganho do modelo em relação a uma triagem clínica baseada nos registros disponíveis na base.
+
+Como a base não possui uma variável única que represente diretamente a decisão profissional de encaminhamento, foi construído um **indicador indireto de triagem clínica**. Esse indicador considera a presença de condições maternas, obstétricas ou comportamentais registradas durante o acompanhamento, associadas a maior risco gestacional.
+
+A comparação foi realizada considerando o baixo peso ao nascer como desfecho de referência. Os casos sinalizados pelo indicador indireto foram tratados como casos priorizados pela triagem clínica estimada, enquanto os demais foram tratados como não priorizados.
+
+| Estratégia | Capacidade de identificação dos casos de baixo peso |
+|---|---:|
+| Triagem clínica estimada | 47,0% |
+| Modelo Lasso | 56,5% |
+
+Os resultados indicam que a triagem clínica estimada foi capaz de identificar cerca de **47% dos casos de baixo peso ao nascer**. Com o uso do modelo Lasso, essa capacidade de identificação aumentou para aproximadamente **56,5%**.
+
+Em termos práticos, isso representa um ganho absoluto de aproximadamente **9,5 pontos percentuais** e uma melhora relativa de cerca de **20,2%** na capacidade de identificação dos casos de baixo peso ao nascer.
+
+Esse resultado sugere que o modelo pode atuar como ferramenta complementar à triagem clínica, ampliando a capacidade de sinalizar gestantes ou recém-nascidos que poderiam demandar acompanhamento prioritário.
+
+
+
+
+
 
 ## Comparação conceitual
 
@@ -515,11 +549,16 @@ D --> E["Priorização do acompanhamento"]
 
 Para ilustrar a utilização prática do modelo, considere uma maternidade responsável pelo acompanhamento de **1.000 gestantes**.
 
-Durante o acompanhamento pré-natal, diferentes características clínicas, obstétricas e maternas são registradas para cada gestante. Tradicionalmente, essas informações são analisadas individualmente pelos profissionais de saúde.
+Durante o acompanhamento pré-natal, diferentes características clínicas, obstétricas e maternas são registradas para cada gestante. Sem o uso de um modelo preditivo, essas informações são avaliadas principalmente a partir da triagem clínica convencional e da experiência da equipe assistencial.
 
-Com a utilização do modelo desenvolvido neste trabalho, essas informações passam a ser analisadas de forma integrada, produzindo uma estimativa objetiva da probabilidade de ocorrência de baixo peso ao nascer.
+Com base na comparação realizada neste projeto, uma triagem clínica estimada a partir dos registros disponíveis seria capaz de identificar aproximadamente **47% dos casos de baixo peso ao nascer**. Com o uso do modelo Lasso, essa capacidade de identificação aumenta para cerca de **56,5%**.
 
-Essa estimativa pode auxiliar a equipe na identificação precoce das gestantes que apresentam maior probabilidade de evoluir para esse desfecho, contribuindo para o direcionamento de ações preventivas e para a organização do acompanhamento assistencial.
+Em termos práticos, isso significa que o modelo pode ampliar a capacidade de sinalização dos casos de maior risco, oferecendo uma informação adicional para apoiar a priorização do acompanhamento pré-natal.
+
+O modelo não deve ser interpretado como substituto da avaliação clínica, mas como uma ferramenta de apoio capaz de integrar múltiplas informações maternas, obstétricas e clínicas em uma estimativa objetiva de risco.
+
+Essa estimativa pode auxiliar a equipe na identificação precoce de gestantes com maior probabilidade de evoluir para baixo peso ao nascer, contribuindo para o direcionamento de ações preventivas e para a organização do acompanhamento assistencial.
+
 
 ## Benefícios potenciais
 
@@ -546,6 +585,9 @@ O desempenho observado neste trabalho reflete as características da base de dad
 Além disso, a qualidade das previsões depende diretamente da qualidade das informações utilizadas como entrada. Registros incompletos, inconsistentes ou desatualizados podem comprometer a capacidade preditiva do algoritmo.
 
 Outro aspecto importante refere-se à interpretação dos resultados. A probabilidade estimada representa uma indicação de risco e deve ser analisada em conjunto com os protocolos assistenciais vigentes e com a avaliação clínica realizada pela equipe multiprofissional.
+
+A comparação com a triagem clínica deve ser interpretada com cautela, pois foi realizada a partir de um indicador indireto construído com base nos registros disponíveis, e não a partir de uma variável que represente diretamente a decisão profissional de encaminhamento. Ainda assim, essa análise fornece uma referência prática para avaliar o possível ganho do modelo em relação a uma triagem baseada apenas nos indicadores clínicos registrados.
+
 
 Assim, recomenda-se que o modelo seja utilizado como ferramenta complementar ao processo de cuidado, contribuindo para a identificação dos indivíduos pertencentes ao grupo de maior risco, sem substituir o julgamento clínico nem os fluxos assistenciais estabelecidos pela instituição.
 
