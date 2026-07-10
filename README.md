@@ -27,18 +27,15 @@ Além da modelagem estatística, o projeto inclui tratamento dos dados, análise
 
 ## Relatório Técnico
 
-O relatório técnico completo está disponível em PDF para leitura direta no GitHub:
+O relatório técnico completo está disponível em duas versões:
+
+[🌐 Acessar Relatório Técnico em HTML](https://gjfr71.github.io/predicao-baixo-peso-ao-nascer/resultados/08_relatorio.html)
 
 [📄 Acessar Relatório Técnico em PDF](resultados/08_relatorio.pdf)
 
-A versão HTML também está disponível no repositório, mas deve ser baixada junto com o arquivo de estilo para visualização local:
+A versão HTML é recomendada para leitura online, pois preserva melhor a navegação e o visual do relatório. A versão PDF também está disponível para leitura direta no GitHub ou compartilhamento externo.
 
-- [`08_relatorio.html`](resultados/08_relatorio.html)
-- [`relatorio.css`](resultados/relatorio.css)
-
-Para visualizar a versão HTML corretamente, baixe os dois arquivos da pasta `resultados/` e abra o `08_relatorio.html` no navegador.
-
-O relatório apresenta o fluxo metodológico, os resultados dos modelos, a seleção do modelo final e a interpretação prática dos achados.
+O relatório apresenta o fluxo metodológico, os resultados dos modelos, a seleção do modelo final, a comparação com a triagem clínica estimada e a interpretação prática dos achados.
 
 ---
 
@@ -244,6 +241,10 @@ A seleção do Lasso não se deu apenas pelo desempenho estatístico isolado, ma
 
 Em aplicações relacionadas à saúde, a identificação dos casos de maior risco tende a ser mais relevante do que a simples maximização da acurácia geral. Por esse motivo, o Recall foi adotado como critério principal de decisão.
 
+Embora exista margem para aprimoramento da capacidade preditiva, o desempenho observado demonstra potencial para utilização do modelo como ferramenta complementar de apoio à decisão em saúde, especialmente quando a identificação precoce dos casos de maior risco constitui prioridade.
+
+Além disso, o Lasso apresentou ganho prático em relação à triagem clínica estimada a partir dos registros disponíveis na base. Enquanto essa triagem estimada identificou cerca de 47% dos casos de baixo peso ao nascer, o modelo ampliou essa capacidade para aproximadamente 56,5%, representando um ganho absoluto de 9,5 pontos percentuais e uma melhora relativa de cerca de 20,2% na identificação dos casos que poderiam demandar acompanhamento prioritário.
+
 ---
 
 ## Resultados Principais
@@ -260,6 +261,7 @@ Entre os principais achados, destacam-se:
 | AUC competitiva | O modelo selecionado manteve desempenho próximo aos melhores modelos em AUC |
 | Precisão de 66,3% | Entre os casos sinalizados pelo modelo, houve proporção relevante de classificações corretas |
 | F1-Score de 61,0% | O modelo apresentou equilíbrio entre Recall e Precisão |
+| Ganho sobre a triagem clínica estimada | O modelo ampliou a identificação dos casos de baixo peso de cerca de 47% para 56,5% |
 | Desempenho semelhante entre modelos | Os resultados sugerem que o ganho principal está na escolha da métrica alinhada ao problema |
 
 O resultado reforça a importância de selecionar o modelo não apenas pela melhor métrica global, mas pelo critério mais adequado ao contexto de aplicação.
@@ -276,8 +278,9 @@ Arquivos disponíveis:
 
 | Arquivo | Descrição |
 |---|---|
-| [`08_relatorio.pdf`](resultados/08_relatorio.pdf) | Versão principal para leitura direta no GitHub |
-| [`08_relatorio.html`](resultados/08_relatorio.html) | Versão HTML renderizada para download e visualização local |
+| [Relatório HTML publicado](https://gjfr71.github.io/predicao-baixo-peso-ao-nascer/resultados/08_relatorio.html) | Versão principal para leitura online |
+| [`08_relatorio.pdf`](resultados/08_relatorio.pdf) | Versão em PDF para leitura direta no GitHub |
+| [`08_relatorio.html`](resultados/08_relatorio.html) | Arquivo HTML renderizado no repositório |
 | [`relatorio.css`](resultados/relatorio.css) | Arquivo de estilo utilizado pela versão HTML |
 
 O relatório contempla:
@@ -375,8 +378,8 @@ Ainda assim, o fluxo analítico permanece reproduzível mediante utilização de
 - Análise exploratória e bivariada dos dados.
 - Comparação entre diferentes algoritmos de aprendizado de máquina.
 - Seleção do modelo final com base em critério alinhado ao contexto clínico.
-- Relatório técnico desenvolvido em Quarto.
-- Versão em PDF do relatório para leitura direta no GitHub.
+- Comparação com triagem clínica estimada a partir dos registros disponíveis.
+- Relatório técnico publicado em HTML via GitHub Pages e disponibilizado também em PDF.
 - Estrutura organizada para reutilização em projetos futuros.
 
 ---
@@ -385,6 +388,7 @@ Ainda assim, o fluxo analítico permanece reproduzível mediante utilização de
 
 - A base utilizada não pode ser disponibilizada publicamente.
 - O desempenho do modelo depende da qualidade, completude e representatividade dos dados disponíveis.
+- A comparação com a triagem clínica foi realizada por meio de um indicador indireto construído a partir dos registros disponíveis, e não por uma variável direta de decisão profissional.
 - O projeto tem finalidade analítica e educacional.
 - A aplicação prática exigiria validação adicional antes de uso operacional.
 - O modelo não substitui avaliação clínica nem protocolos institucionais de saúde.
@@ -409,6 +413,7 @@ Outro ponto relevante foi a necessidade de traduzir análises estatísticas em l
 - Desenvolvimento de dashboard para apoio à interpretação dos resultados.
 - Automatização do pipeline de predição em ambiente controlado.
 - Comparação com novas abordagens de modelagem e calibração de probabilidades.
+- Comparação com registros diretos de decisão profissional, caso estejam disponíveis em bases futuras.
 
 ---
 
