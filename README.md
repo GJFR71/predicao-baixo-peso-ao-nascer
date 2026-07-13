@@ -57,7 +57,7 @@ A pergunta central do projeto foi:
 - Realizar análise exploratória univariada e bivariada.
 - Construir variáveis derivadas e indicadores relacionados ao risco gestacional.
 - Comparar diferentes algoritmos de aprendizado de máquina.
-- Selecionar o modelo com melhor desempenho para identificação dos casos de interesse.
+- Selecionar o modelo com maior Sensibilidade, considerando também seu desempenho nas demais métricas.
 - Produzir um relatório técnico com interpretação prática dos resultados.
 
 ---
@@ -168,7 +168,7 @@ predicao-baixo-peso-ao-nascer/
 | Engenharia de atributos | Construção de variáveis derivadas e indicadores de risco |
 | Preparação para modelagem | Separação da base, pré-processamento e organização dos dados para treino |
 | Modelagem | Treinamento de diferentes algoritmos de classificação |
-| Avaliação | Comparação dos modelos por métricas de desempenho |
+| Avaliação | Comparação dos modelos por métricas clínicas e preditivas |
 | Comunicação | Elaboração de relatório técnico com linguagem acessível |
 
 ---
@@ -189,27 +189,27 @@ Foram avaliados cinco modelos de aprendizado de máquina:
 
 ## Critério de Seleção
 
-Os modelos foram comparados a partir de múltiplas métricas de desempenho:
+Os modelos foram comparados por métricas usuais em estudos diagnósticos e preditivos na área da saúde:
 
-- Acurácia;
-- Recall;
-- Precisão;
-- F1-Score;
-- Área sob a Curva ROC.
+- **Acurácia:** proporção de classificações corretas entre todos os casos avaliados;
+- **Sensibilidade (Recall):** proporção dos casos reais de baixo peso alcançados pelo modelo;
+- **Valor Preditivo Positivo — VPP (Precisão):** proporção de casos que realmente apresentaram baixo peso entre aqueles sinalizados pelo modelo;
+- **Medida F1:** média harmônica entre Sensibilidade e VPP;
+- **AUC-ROC:** capacidade de discriminação do modelo entre casos com e sem baixo peso.
 
-Como o projeto está inserido em um contexto de saúde, o **Recall** foi adotado como principal critério de seleção.
+A **Sensibilidade** foi adotada como principal critério de seleção. Essa escolha decorre do objetivo clínico do projeto: alcançar o maior número possível de recém-nascidos que efetivamente apresentem baixo peso ao nascer.
 
-Essa escolha prioriza a identificação correta dos recém-nascidos com baixo peso ao nascer. Em termos práticos, o objetivo é reduzir a chance de deixar de sinalizar casos que poderiam demandar maior atenção em ações preventivas ou programas de acompanhamento materno-infantil.
+Assim, uma Sensibilidade de 56,5% significa que, entre todos os casos reais de baixo peso, o modelo sinalizou 56,5%. Esse valor não representa o percentual geral de acertos do modelo, medida expressa pela Acurácia, nem a proporção de acertos entre os casos sinalizados, medida pelo VPP.
 
-Embora outras métricas, como AUC e acurácia, também sejam importantes, elas foram utilizadas como apoio à interpretação geral do desempenho dos modelos.
+Em termos práticos, a priorização da Sensibilidade busca reduzir a ocorrência de falso-negativos, isto é, casos reais de baixo peso que não seriam sinalizados para possível acompanhamento prioritário. As demais métricas foram utilizadas como apoio à interpretação global do desempenho dos modelos.
 
 ---
 
 ## Resultados dos Modelos
 
-A tabela a seguir resume o desempenho dos modelos avaliados.
+A tabela a seguir resume o desempenho dos modelos avaliados utilizando a terminologia mais comum na área da saúde.
 
-| Modelo | Acurácia (%) | Recall (%) | Precisão (%) | F1-Score (%) | AUC (%) |
+| Modelo | Acurácia (%) | Sensibilidade (%) | VPP (%) | Medida F1 (%) | AUC-ROC (%) |
 |---|---:|---:|---:|---:|---:|
 | Lasso | 63,9 | 56,5 | 66,3 | 61,0 | 68,1 |
 | Ridge | 63,9 | 56,3 | 66,3 | 60,9 | 68,2 |
@@ -217,9 +217,9 @@ A tabela a seguir resume o desempenho dos modelos avaliados.
 | XGBoost | 63,0 | 55,3 | 65,3 | 59,9 | 68,0 |
 | Elastic Net | 62,7 | 47,5 | 68,1 | 56,0 | 67,9 |
 
-De forma geral, os modelos apresentaram desempenhos próximos, especialmente em acurácia e AUC.
+De forma geral, os modelos apresentaram resultados próximos, especialmente em Acurácia e AUC-ROC.
 
-Embora Ridge e Random Forest tenham apresentado AUC ligeiramente superior, o modelo Lasso obteve o maior Recall entre os modelos avaliados, métrica priorizada neste projeto em razão do contexto de saúde materno-infantil.
+O Ridge e o Random Forest apresentaram AUC-ROC ligeiramente superior, enquanto o Elastic Net apresentou o maior VPP. O Lasso foi selecionado por apresentar a maior Sensibilidade, de 56,5%, conforme o critério prioritário definido para o projeto. Essa escolha não significa que o Lasso tenha apresentado o melhor desempenho em todas as métricas.
 
 ---
 
@@ -227,46 +227,50 @@ Embora Ridge e Random Forest tenham apresentado AUC ligeiramente superior, o mod
 
 O modelo selecionado foi o **Lasso**.
 
-A escolha foi baseada principalmente no **Recall**, métrica priorizada no projeto por representar a capacidade do modelo de identificar corretamente os casos de baixo peso ao nascer.
+A escolha foi baseada principalmente na **Sensibilidade**, métrica priorizada por representar a proporção de casos reais de baixo peso ao nascer alcançados pelo modelo.
 
-| Modelo Selecionado | Indicador | Resultado (%) |
+| Modelo selecionado | Indicador clínico-preditivo | Resultado (%) |
 |---|---|---:|
 | Lasso | Acurácia | 63,9 |
-| Lasso | Recall | 56,5 |
-| Lasso | Precisão | 66,3 |
-| Lasso | F1-Score | 61,0 |
-| Lasso | AUC | 68,1 |
+| Lasso | Sensibilidade | 56,5 |
+| Lasso | Valor Preditivo Positivo (VPP) | 66,3 |
+| Lasso | Medida F1 | 61,0 |
+| Lasso | AUC-ROC | 68,1 |
 
-A seleção do Lasso não se deu apenas pelo desempenho estatístico isolado, mas pela coerência entre o critério definido para o problema e a utilidade prática esperada do modelo.
+A Sensibilidade de 56,5% indica que, entre os recém-nascidos que efetivamente apresentaram baixo peso, o modelo sinalizou 56,5%. Consequentemente, 43,5% dos casos reais não foram alcançados pelo modelo, correspondendo aos falsos negativos.
 
-Em aplicações relacionadas à saúde, a identificação dos casos de maior risco tende a ser mais relevante do que a simples maximização da acurácia geral. Por esse motivo, o Recall foi adotado como critério principal de decisão.
+Esse resultado não significa que o modelo tenha acertado 56,5% de todas as classificações. O percentual geral de classificações corretas foi de 63,9%, expresso pela Acurácia. Já o VPP de 66,3% indica que, entre os casos sinalizados pelo Lasso, 66,3% realmente apresentaram baixo peso ao nascer.
 
-Embora exista margem para aprimoramento da capacidade preditiva, o desempenho observado demonstra potencial para utilização do modelo como ferramenta complementar de apoio à decisão em saúde, especialmente quando a identificação precoce dos casos de maior risco constitui prioridade.
+A seleção do Lasso decorreu da coerência entre a métrica prioritária e o objetivo do projeto. O modelo não apresentou superioridade em todas as métricas: Ridge e Random Forest obtiveram AUC-ROC ligeiramente maior, e Elastic Net apresentou VPP superior. Ainda assim, o Lasso alcançou a maior proporção de casos reais de baixo peso entre os modelos avaliados.
 
-Além disso, o Lasso apresentou ganho prático em relação à triagem clínica estimada a partir dos registros disponíveis na base. Enquanto essa triagem estimada identificou cerca de 47% dos casos de baixo peso ao nascer, o modelo ampliou essa capacidade para aproximadamente 56,5%, representando um ganho absoluto de 9,5 pontos percentuais e uma melhora relativa de cerca de 20,2% na identificação dos casos que poderiam demandar acompanhamento prioritário.
+Na comparação com a triagem clínica estimada a partir dos registros disponíveis, a Sensibilidade passou de aproximadamente 47% para 56,5%. Isso representa um ganho absoluto de 9,5 pontos percentuais e uma melhora relativa de cerca de 20,2% na capacidade de alcançar casos que poderiam demandar acompanhamento prioritário.
+
+O modelo deve ser interpretado como ferramenta complementar de apoio à decisão. Seu desempenho ainda apresenta margem para aprimoramento e não substitui avaliação clínica, protocolos institucionais ou validação externa.
 
 ---
 
 ## Resultados Principais
 
-Os resultados indicam que os modelos avaliados tiveram desempenho relativamente próximo, sem diferenças expressivas entre as principais abordagens.
+Os modelos avaliados apresentaram desempenho relativamente próximo, sem superioridade absoluta de uma abordagem em todas as métricas.
 
-O modelo **Lasso** foi selecionado por apresentar o melhor Recall, alcançando **56,5%**, além de manter desempenho competitivo nas demais métricas.
+O **Lasso** foi selecionado por apresentar a maior **Sensibilidade**, alcançando **56,5% dos casos reais de baixo peso ao nascer**, além de manter resultados próximos aos demais modelos nos outros indicadores.
 
 Entre os principais achados, destacam-se:
 
 | Aspecto | Interpretação |
 |---|---|
-| Melhor Recall | O Lasso apresentou a maior capacidade de identificação dos casos de baixo peso ao nascer |
-| AUC competitiva | O modelo selecionado manteve desempenho próximo aos melhores modelos em AUC |
-| Precisão de 66,3% | Entre os casos sinalizados pelo modelo, houve proporção relevante de classificações corretas |
-| F1-Score de 61,0% | O modelo apresentou equilíbrio entre Recall e Precisão |
-| Ganho sobre a triagem clínica estimada | O modelo ampliou a identificação dos casos de baixo peso de cerca de 47% para 56,5% |
-| Desempenho semelhante entre modelos | Os resultados sugerem que o ganho principal está na escolha da métrica alinhada ao problema |
+| Sensibilidade de 56,5% | Entre os casos que efetivamente apresentaram baixo peso, o Lasso sinalizou 56,5% |
+| Falso-negativos de 43,5% | Entre os casos reais de baixo peso, 43,5% não foram sinalizados pelo modelo |
+| Acurácia de 63,9% | Considerando todos os casos, 63,9% das classificações foram corretas |
+| VPP de 66,3% | Entre os casos sinalizados pelo modelo, 66,3% realmente apresentaram baixo peso |
+| Medida F1 de 61,0% | O modelo apresentou equilíbrio entre Sensibilidade e VPP |
+| AUC-ROC de 68,1% | O modelo apresentou capacidade discriminatória próxima à dos demais modelos |
+| Ganho sobre a triagem clínica estimada | A Sensibilidade aumentou de aproximadamente 47% para 56,5% |
+| Resultados semelhantes entre modelos | A seleção foi orientada pela métrica mais coerente com o objetivo clínico, e não por superioridade global |
 
-O resultado reforça a importância de selecionar o modelo não apenas pela melhor métrica global, mas pelo critério mais adequado ao contexto de aplicação.
+Os resultados reforçam a importância de selecionar modelos a partir da métrica mais adequada ao contexto de aplicação.
 
-Neste projeto, como o objetivo era apoiar a identificação de recém-nascidos com maior risco de baixo peso ao nascer, a priorização do Recall foi considerada mais adequada do que a escolha baseada exclusivamente em AUC ou acurácia.
+Neste projeto, a Sensibilidade foi priorizada porque o objetivo era alcançar o maior número possível de casos reais de baixo peso ao nascer. A Acurácia, o VPP, a Medida F1 e a AUC-ROC permaneceram importantes para avaliar as limitações e o equilíbrio geral do modelo.
 
 ---
 
